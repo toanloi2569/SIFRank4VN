@@ -6,6 +6,7 @@
 import numpy as np
 from model import input_representation
 import torch
+from Levenshtein import ratio
 
 with open("./auxiliary_data/stopwords_vietnamese.txt", 'r', encoding='UTF-8') as f:
     data = f.readlines()
@@ -139,8 +140,19 @@ def get_position_score(keyphrase_candidate_list, position_bias):
         i+=1
     return position_score
 
+def eliminate_duplicates(dist, r):
+    for i in range(len(dist)-1):
+        for j in range(i+1, len(dist)):
+            # phrase is tuple (text, value)
+            phrase1 = dist[i][0]
+            phrase2 = dist[j][0]
+            if ratio(phrase1, phrase2) > r:
+                dist[j] = (phrase2, 0)
+    dist = sorted(dist, key=lambda x: x[1], reverse=True)
+    return dist
+
 def SIFRank(text, SIF, en_model, method="average", N=15,
-            sent_emb_method="bert", if_DS=True, if_EA=True):
+            sent_emb_method="bert", if_DS=True, if_EA=True, ratio=0.6):
     """
     :param text_obj:
     :param sent_embeddings:
@@ -162,10 +174,12 @@ def SIFRank(text, SIF, en_model, method="average", N=15,
     dist_all = get_all_dist(candidate_embeddings_list, text_obj, dist_list)
     dist_final = get_final_dist(dist_all, method='average')
     dist_sorted = sorted(dist_final.items(), key=lambda x: x[1], reverse=True)
-    return dist_sorted[0:N]
+    dist_deduplicated = eliminate_duplicates(dist_sorted, ratio)
+    return dist_deduplicated[0:N]
 
 def SIFRank_plus(text, SIF, en_model, method="average", N=15,
-            sent_emb_method="bert", if_DS=True, if_EA=True, position_bias = 3.4):
+            sent_emb_method="bert", if_DS=True, if_EA=True, 
+            position_bias = 3.4, ratio = 0.6):
     """
     :param text_obj:
     :param sent_embeddings:
@@ -190,6 +204,7 @@ def SIFRank_plus(text, SIF, en_model, method="average", N=15,
         if np in position_score:
             dist_final[np] = dist*position_score[np]/average_score#Little change here
     dist_sorted = sorted(dist_final.items(), key=lambda x: x[1], reverse=True)
-    return dist_sorted[0:N]
+    dist_deduplicated = eliminate_duplicates(dist_sorted, ratio)
+    return dist_deduplicated[0:N]
 
 

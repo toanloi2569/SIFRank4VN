@@ -1,0 +1,29 @@
+body {
+  padding: 50px;
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+  
+a {
+  color: #00B7FF;
+}
+
+button {
+  margin-bottom: 5px;
+}
+
+.highlighted p {
+  font-size: 18px;
+  line-height: 2;
+}
+
+.phrases p {
+  font-size: 18px;
+  /* line-height: 2;
+  margin : 0;
+  padding: 0; */
+}
+
+.highlighted mark {
+  background-color: darkturquoise;
+  color: black;
+}

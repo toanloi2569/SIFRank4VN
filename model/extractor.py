@@ -22,7 +22,7 @@ GRAMMAR2 = """  NP:
 
 def is_subset(start, end, keyphrase_candidate):
     for _, (s, e) in keyphrase_candidate:
-        if s < start < e or s < end < e:
+        if s <= start <= e or s <= end <= e:
             return True
     return False
 

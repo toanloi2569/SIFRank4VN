@@ -1,0 +1,41 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    
+    <link rel="icon" href='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRG8IvpkNZ7xGmvAvSLgrgZKRQSzrp0cs1voU7kt66Hn8JcMwea' />
+    <source src='/js/bootstrap.min.js' type="text/javascript" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href= '/css/style.css' />
+    <title>Keyphrase Extractor</title>
+    {% endblock %}
+</head>
+<body>
+    <div>
+        <h1>Welcome to my project</h1>
+        <h3>Keyphrase Extrator</h3>
+    </div>
+    <hr>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <hr>
+
+    <div>
+        <form method="get" action="/extract">
+            <button type="submit" class="btn btn-info">Main page</button>
+        </form>
+        {% block footer %}
+        &copy; Copyright 2019 by <a href="http://domain.invalid/">Sm Team</a>.
+        {% endblock %}
+    </div>
+</body>
+</html>

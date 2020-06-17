@@ -6,6 +6,7 @@ import numpy as np
 class WordEmbeddings():
     def __init__(self, pretrain = "auxiliary_data/PhoBERT_base_fairseq"):
         self.phoBERT = RobertaModel.from_pretrained(pretrain, checkpoint_file='model.pt')
+        self.phoBERT.eval()
         parser = options.get_preprocessing_parser()  
         parser.add_argument('--bpe-codes', type=str, help='path to fastBPE BPE', default=pretrain+"/bpe.codes")  
         args, unknown = parser.parse_known_args()  

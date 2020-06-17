@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row col-sm-12">
+    <div class="highlighted col-sm-8 border-right">
+        <div class="form-group">
+            <label for="comment"><b>Highlight</b></label>
+            <div class="border rounded" style="padding: 10px">
+                <p>{{highlighted|safe}}</p
+            ></div>
+        </div>
+    </div>
+
+    <div class="phrases col-sm">
+        <div>
+            <div>
+                <label for="comment"><b>Phrases</b></label>
+                <div class="form-group border rounded" style="padding: 10px">
+                    {% for phrase in phrases %}
+                        <p>{{phrase['phrase']}} : {{phrase['score']}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

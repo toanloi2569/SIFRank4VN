@@ -32,7 +32,7 @@ def extract_keyphrase(text):
     phrases = []
     highlighted = text
     try:
-        keyphrases = SIFRank(text, SIF, vncorenlp, N=10, ratio=0.6)
+        keyphrases = SIFRank_plus(text, SIF, vncorenlp, position_bias=3.4, N=10, ratio=0.6)
         for keyphrase in keyphrases:
             phrases.append({'phrase':keyphrase[0], 'score': round(keyphrase[1], 3)})
             pos = highlighted.lower().find(keyphrase[0].replace('_', ' '))
